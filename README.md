@@ -2,7 +2,7 @@
 
 A single-file website for collecting stories, memories, and messages for someone you love. Built for retirements, milestone birthdays, memorials, or any occasion worth celebrating.
 
-No frameworks. No build step. No backend to manage. Just one HTML file, a free hosting provider, and a form service.
+No build step. No backend to manage. Just one HTML file, a free hosting provider / form service.
 
 ## Project Structure
 
