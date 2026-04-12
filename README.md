@@ -4,6 +4,18 @@ A single-file website for collecting stories, memories, and messages for someone
 
 No frameworks. No build step. No backend to manage. Just one HTML file, a free hosting provider, and a form service.
 
+## Project Structure
+
+```
+tribute-page/
+├── index.html             # The page (you don't need to edit this)
+├── config.js              # All your customizations go here
+├── README.md              # This guide
+├── LICENSE                # MIT
+└── examples/
+    └── tom-kenslea.html   # Real-world example
+```
+
 ## What You Get
 
 - Full-screen hero section with a photo of your loved one
@@ -43,20 +55,36 @@ Click the green **Code** button above and download the ZIP, or fork it to your o
 
 ### 3. Customize the content
 
-Open `index.html` and update these sections:
+Open **`config.js`** — this is the only file you need to edit. All the text, photos, and settings are in one place with clear labels:
 
-| What to change | Where to find it |
-|---|---|
-| Page title | `<title>` tag in `<head>` |
-| Hero photo | `<img>` tag `src` in the hero section — use any image URL |
-| Hero title | `<h1 class="tk-hero-title">` |
-| Hero subtitle | `<p class="tk-hero-subtitle">` |
-| Hero detail text | `<p class="tk-hero-detail">` |
-| Form heading | `<h2>Add Yours</h2>` |
-| Form description | The `<p>` tags inside `.tribute-header` |
-| Story prompt | `<label class="section-label">` above the editor |
-| Editor placeholder | `placeholder: 'I remember when…'` in the JavaScript |
-| Success message | Inside `.tribute-success` near the bottom |
+```js
+var CONFIG = {
+  formEndpoint: 'https://formspree.io/f/xAbCdEfG',  // your Formspree endpoint
+
+  pageTitle: 'Tribute Page',                          // browser tab title
+
+  heroPhoto: 'https://example.com/photo.jpg',         // the big photo at the top
+  heroPhotoAlt: 'A photo of your loved one',          // accessibility text
+  heroTitle: 'First Last:<br/>A Celebration',          // the big title (use <br/> for line breaks)
+  heroSubtitle: 'A collection of stories...',          // description
+  heroDetail: "Whether it's a favorite memory...",     // smaller detail text
+  heroButton: 'Share Your Story',                      // button text
+
+  formHeading: 'Add Yours',                            // form section heading
+  formDescription1: 'Share your favorite stories.',    // first line of form description
+  formDescription2: '',                                // second line (leave empty to hide)
+  storyPrompt: "What's your favorite memory?",         // prompt above the text editor
+  editorPlaceholder: 'I remember when…',               // ghost text in the editor
+
+  photoLabel: 'Photos',                                // photo upload label
+  photoHint: 'Upload your favorite photos...',         // photo upload description
+
+  successTitle: 'Thank you!',                          // shown after submission
+  successMessage: 'Your message has been submitted.',  // shown after submission
+};
+```
+
+You don't need to touch `index.html` at all — everything flows from `config.js`.
 
 ### 4. Deploy for free
 
@@ -100,15 +128,17 @@ Yes. Formspree is month-to-month, no commitment. Subscribe for one month while y
 
 ## Customization Tips
 
-**Change the color scheme:** The accent color is `#1a1a1a` (black). Search and replace it with any hex color to match your vibe.
+**All text and images:** Edit `config.js`. That's it. You never need to touch `index.html` for content changes.
 
-**Change fonts:** The page uses [Lora](https://fonts.google.com/specimen/Lora) (serif, for headings and the editor) and [Inter](https://fonts.google.com/specimen/Inter) (sans-serif, for UI). Swap them in the Google Fonts `<link>` tag and the CSS `font-family` rules.
+**Change the color scheme:** The accent color is `#1a1a1a` (black) in `index.html`. Search and replace it with any hex color to match your vibe. This is the one thing that requires editing the HTML file.
 
-**Add more form fields:** Add a new `<div class="tribute-field">` block with a label and input. The field's `name` attribute is what shows up in your Formspree submissions.
+**Change fonts:** The page uses [Lora](https://fonts.google.com/specimen/Lora) (serif, for headings and the editor) and [Inter](https://fonts.google.com/specimen/Inter) (sans-serif, for UI). Swap them in the Google Fonts `<link>` tag and the CSS `font-family` rules in `index.html`.
 
-**Remove photo uploads:** Delete the upload zone HTML block (from `Photographic Proof` label through the closing `</div>` of `.upload-zone`) and remove the `setupUploadZone` call in the JavaScript.
+**Add more form fields:** Add a new `<div class="tribute-field">` block with a label and input in `index.html`. The field's `name` attribute is what shows up in your Formspree submissions.
 
-**Use on Squarespace or other site builders:** The HTML works inside a Squarespace Code Block too. Just paste the contents of `index.html` (everything inside `<body>`) into a Code Block with "Display Source" unchecked. Note: the full-bleed hero may be constrained by the site builder's container.
+**Remove photo uploads:** Delete the upload zone HTML block in `index.html` (from the photo label through the closing `</div>` of `.upload-zone`) and remove the `setupUploadZone` call in the JavaScript.
+
+**Use on Squarespace or other site builders:** You can also paste the HTML into a Squarespace Code Block (with "Display Source" unchecked), but you'd need to inline the config values since Squarespace won't load a separate JS file. The `examples/tom-kenslea.html` file shows this approach — it's a single self-contained file.
 
 ## Tech Stack
 

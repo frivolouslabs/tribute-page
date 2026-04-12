@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tribute Page</title>
+  <script src="config.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -541,40 +542,26 @@
 
 <div class="tk-page">
 
-  <!-- ===== HERO =====
-       CUSTOMIZE: Replace the image src, title, subtitle, and detail text below.
-  -->
   <div class="tk-hero">
-    <img
-      class="tk-hero-image"
-      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=2000"
-      alt="A meaningful photo of your loved one"
-    />
+    <img class="tk-hero-image" id="cfg-hero-photo" src="" alt="" />
     <div class="tk-hero-overlay"></div>
 
     <div class="tk-hero-content">
-      <h1 class="tk-hero-title">First Last:<br/>A Celebration</h1>
-      <p class="tk-hero-subtitle">
-        To celebrate [name]'s [occasion], we're collecting stories, memories, and messages from the people who've meant the most to [him/her/them].
-      </p>
-      <p class="tk-hero-detail">
-        Whether it's a favorite memory or just a few words -- we'd love to hear from you.
-      </p>
-      <a href="#tribute-form-section" class="tk-hero-btn" onclick="event.preventDefault(); document.getElementById('tribute-form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });">
-        Share Your Story <span class="arrow">&darr;</span>
+      <h1 class="tk-hero-title" id="cfg-hero-title"></h1>
+      <p class="tk-hero-subtitle" id="cfg-hero-subtitle"></p>
+      <p class="tk-hero-detail" id="cfg-hero-detail"></p>
+      <a href="#tribute-form-section" class="tk-hero-btn" id="cfg-hero-btn" onclick="event.preventDefault(); document.getElementById('tribute-form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });">
+        <span id="cfg-hero-btn-text"></span> <span class="arrow">&darr;</span>
       </a>
     </div>
   </div>
 
-  <!-- ===== FORM =====
-       CUSTOMIZE: Update the header, form labels, and placeholder text below.
-  -->
   <div class="tribute-form-wrapper" id="tribute-form-section">
 
     <div class="tribute-header">
-      <h2>Add Yours</h2>
-      <p>We'd love to hear your favorite stories and memories.</p>
-      <p>Share yours below!</p>
+      <h2 id="cfg-form-heading"></h2>
+      <p id="cfg-form-desc1"></p>
+      <p id="cfg-form-desc2"></p>
     </div>
 
     <form id="tribute-form" enctype="multipart/form-data">
@@ -595,7 +582,7 @@
         <input type="email" id="tribute-email" name="email" placeholder="your@email.com" required />
       </div>
 
-      <label class="section-label">What's your favorite memory? <span class="optional">(Optional)</span></label>
+      <label class="section-label"><span id="cfg-story-prompt"></span> <span class="optional">(Optional)</span></label>
       <p class="section-hint">Use the toolbar to format your text &mdash; bold, italics, headings, colors, and more.</p>
 
       <div id="tribute-editor-container">
@@ -604,8 +591,8 @@
 
       <input type="hidden" id="tribute-message-html" name="message" />
 
-      <label class="section-label">Photos <span class="optional">(Optional)</span></label>
-      <p class="section-hint">Upload your favorite photos. Max 10 per submission &mdash; if you've got more, feel free to come back and submit again!</p>
+      <label class="section-label"><span id="cfg-photo-label"></span> <span class="optional">(Optional)</span></label>
+      <p class="section-hint" id="cfg-photo-hint"></p>
 
       <div class="upload-zone" id="photo-upload-zone">
         <input type="file" id="photo-input" name="photos" accept="image/*" multiple />
@@ -624,8 +611,8 @@
 
     <div class="tribute-success" id="tribute-success">
       <div class="checkmark">&#10003;</div>
-      <h3>Thank you!</h3>
-      <p>Your message has been submitted.<br/>This is going to mean the world.</p>
+      <h3 id="cfg-success-title"></h3>
+      <p id="cfg-success-message"></p>
     </div>
   </div>
 
@@ -633,18 +620,33 @@
 
 <script>
 (function() {
-  // =====================================================================
-  //  IMPORTANT: Replace this with YOUR Formspree endpoint.
-  //  Sign up at https://formspree.io, create a form, and paste the
-  //  endpoint URL below. It looks like: https://formspree.io/f/xAbCdEfG
-  //
-  //  DO NOT use someone else's endpoint — your submissions will go to them.
-  // =====================================================================
-  var FORM_ENDPOINT = 'YOUR_FORMSPREE_ENDPOINT_HERE';
+  // Populate page from config.js
+  document.title = CONFIG.pageTitle || 'Tribute Page';
+  document.getElementById('cfg-hero-photo').src = CONFIG.heroPhoto;
+  document.getElementById('cfg-hero-photo').alt = CONFIG.heroPhotoAlt;
+  document.getElementById('cfg-hero-title').innerHTML = CONFIG.heroTitle;
+  document.getElementById('cfg-hero-subtitle').textContent = CONFIG.heroSubtitle;
+  document.getElementById('cfg-hero-detail').textContent = CONFIG.heroDetail;
+  document.getElementById('cfg-hero-btn-text').textContent = CONFIG.heroButton;
+  document.getElementById('cfg-form-heading').textContent = CONFIG.formHeading;
+  document.getElementById('cfg-form-desc1').textContent = CONFIG.formDescription1;
+  var desc2 = document.getElementById('cfg-form-desc2');
+  if (CONFIG.formDescription2) {
+    desc2.textContent = CONFIG.formDescription2;
+  } else {
+    desc2.style.display = 'none';
+  }
+  document.getElementById('cfg-story-prompt').textContent = CONFIG.storyPrompt;
+  document.getElementById('cfg-photo-label').textContent = CONFIG.photoLabel;
+  document.getElementById('cfg-photo-hint').textContent = CONFIG.photoHint;
+  document.getElementById('cfg-success-title').textContent = CONFIG.successTitle;
+  document.getElementById('cfg-success-message').innerHTML = CONFIG.successMessage;
+
+  var FORM_ENDPOINT = CONFIG.formEndpoint;
 
   var quill = new Quill('#tribute-editor', {
     theme: 'snow',
-    placeholder: 'I remember when\u2026',
+    placeholder: CONFIG.editorPlaceholder || 'I remember when\u2026',
     modules: {
       toolbar: [
         [{ 'header': [1, 2, 3, false] }],
