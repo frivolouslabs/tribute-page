@@ -1,8 +1,8 @@
 # Tribute Page
 
-A single-file website for collecting stories, memories, and messages for someone you love. Built for retirements, milestone birthdays, memorials, or any occasion worth celebrating.
+A single-file website for collecting stories, memories, and messages for someone you love. Built for retirements, milestone birthdays, memorials, or any occasion.
 
-No build step. No backend to manage. Just one HTML file, a free hosting provider / form service.
+HTML file, a free hosting provider / form service.
 
 ## Project Structure
 
