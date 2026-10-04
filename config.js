@@ -19,7 +19,7 @@ var CONFIG = {
   //  PAGE TITLE
   //  This shows in the browser tab.
   // ----------------------------------------------------------
-  pageTitle: 'Tribute Page',
+  pageTitle: 'Birthday Tribute Page',
 
 
   // ----------------------------------------------------------

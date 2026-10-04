@@ -1,4 +1,4 @@
-# Tribute Page
+# Birthday Tribute Page
 
 A single-file website for collecting stories, memories, and messages for someone you love. Built for retirements, milestone birthdays, memorials, or any occasion.
 
@@ -61,7 +61,7 @@ Open **`config.js`** — this is the only file you need to edit. All the text, p
 var CONFIG = {
   formEndpoint: 'https://formspree.io/f/xAbCdEfG',  // your Formspree endpoint
 
-  pageTitle: 'Tribute Page',                          // browser tab title
+  pageTitle: 'Birthday Tribute Page',                 // browser tab title
 
   heroPhoto: 'https://example.com/photo.jpg',         // the big photo at the top
   heroPhotoAlt: 'A photo of your loved one',          // accessibility text
